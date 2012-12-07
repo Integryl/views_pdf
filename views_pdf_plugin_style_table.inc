@@ -84,7 +84,7 @@ class views_pdf_plugin_style_table extends views_plugin_style {
 
     foreach ($columns as $field => $column) {
       
-      if ($fields[$field]['exclude'] == 1) {
+      if (!empty($fields[$field]['exclude'])) {
         continue;
       }
           
