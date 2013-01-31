@@ -11,7 +11,6 @@
  */
 function views_append_views_data() {
 
-
   $data['views_append']['table']['group'] = t('View');
   $data['views_append']['table']['join'] = array(
     '#global' => array(),
@@ -25,9 +24,6 @@ function views_append_views_data() {
       'click sortable' => FALSE,
       'notafield' => TRUE,
     ),
-  ); 
+  );
   return $data;
 }
-
-
-
