@@ -201,7 +201,6 @@ class PdfTemplate extends FPDI
    * This method draws a field on the PDF.
    */
   public function drawContent($row, $options, &$view = NULL, $key = NULL, $printLabels = TRUE) {
-
     if (!is_array($options)) {
       $options = array();
     }
@@ -239,14 +238,14 @@ class PdfTemplate extends FPDI
     // that we have enough space left on this page. If not force adding
     // a new one.
     if (isset($options['render']['minimal_space'])) {
-      $enoughtSpace = ($this->y + $this->bMargin + $options['render']['minimal_space']) < $pageDim['hk'];
+      $enoughSpace = ($this->y + $this->bMargin + $options['render']['minimal_space']) < $pageDim['hk'];
     }
     else {
-      $enoughtSpace = true;
+      $enoughSpace = true;
     }
 
     // Check if there is a page, if not add it:
-    if (!$enoughtSpace or $this->getPage() == 0 or $this->addNewPageBeforeNextContent == true) {
+    if (!$enoughSpace or $this->getPage() == 0 or $this->addNewPageBeforeNextContent == true) {
       $this->addNewPageBeforeNextContent = false;
       $this->addPage();
     }
@@ -273,8 +272,8 @@ class PdfTemplate extends FPDI
       switch ($options['position']['corner']) {
         default:
         case 'top_left':
-          $x = $options['position']['x']+$this->lMargin;
-          $y = $options['position']['y']+$this->tMargin;
+          $x = $options['position']['x'] + $this->lMargin;
+          $y = $options['position']['y'] + $this->tMargin;
           break;
 
         case 'top_right':
@@ -372,7 +371,6 @@ class PdfTemplate extends FPDI
   }
 
   protected function renderRow($x, $y, $row, $options, &$view = NULL, $key = NULL, $printLabels = TRUE) {
-
     $pageDim = $this->getPageDimensions();
 
     // Render the content if it is not already:
@@ -481,8 +479,13 @@ class PdfTemplate extends FPDI
       $content = strip_tags($content);
     }
 
-    // Write the content of a field to the pdf file:
-    $this->MultiCell($w, $h, $prefix . $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
+    if(is_object($view) && is_object($view->field[$key]) && isset($view->field[$key]->field_info) && $view->field[$key]->field_info['type'] == 'image' && !empty($content)){
+      $this->Image($content, $x, $y, $w, $h);
+    }
+    else {
+      // Write the content of a field to the pdf file:
+      $this->MultiCell($w, $h, $prefix . $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
+    }
 
     // Reset font to default
     $this->SetFont($this->defaultFontFamily, implode('', $this->defaultFontStyle), $this->defaultFontSize);
@@ -504,7 +507,6 @@ class PdfTemplate extends FPDI
    * This method draws a table on the PDF.
    */
   public function drawTable(&$view, $options) {
-
     $rows = $view->result;
     $columns = $view->field;
     $pageDim = $this->getPageDimensions();
@@ -566,7 +568,6 @@ class PdfTemplate extends FPDI
     }
 
     foreach ($columns as $id => $column) {
-
       if (!empty($column->options['exclude'])) {
         continue;
       }
@@ -705,7 +706,6 @@ class PdfTemplate extends FPDI
       }
 
       $rowY += $options['position']['row_height'];
-
     }
 
     $this->SetY($rowY + $options['position']['row_height']);
@@ -751,7 +751,6 @@ class PdfTemplate extends FPDI
     }
 
     return $numberOfPages;
-
   }
 
   /**
@@ -766,7 +765,6 @@ class PdfTemplate extends FPDI
    * This method adds a new page to the PDF.
    */
   public function addPage($path = NULL, $reset = false, $numbering = 'main') {
-
     $this->mainContentPageNumber++;
     $this->rowContentPageNumber++;
 
