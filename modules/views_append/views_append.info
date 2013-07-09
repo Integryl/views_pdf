@@ -5,3 +5,4 @@ package = Views
 core = 7.x
 
 files[] = views_append_handler_append_view.inc
+
