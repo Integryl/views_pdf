@@ -13,7 +13,7 @@ function views_pdf_views_data() {
   $data['pdf']['table']['join'] = array(
     '#global' => array(),
   );
-
+  
   $data['pdf']['page_break'] = array(
     'title' => t('Page Break'),
     'help' => t('Insert in the PDF view a new page.'),
@@ -23,7 +23,7 @@ function views_pdf_views_data() {
       'notafield' => TRUE,
     ),
   );
-
+  
   $data['pdf']['page_number'] = array(
     'title' => t('Page Number'),
     'help' => t('Contains the page number of the current page.'),
@@ -33,9 +33,10 @@ function views_pdf_views_data() {
       'notafield' => TRUE,
     ),
   );
-
+  
   return $data;
 }
+
 
 /**
  * Implementation of hook_views_plugins().
@@ -91,6 +92,7 @@ function views_pdf_views_plugins() {
         'help topic' => 'style-row-fields',
       ),
     ),
+ 
 
   );
 }

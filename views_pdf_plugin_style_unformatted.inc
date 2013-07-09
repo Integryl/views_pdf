@@ -1,9 +1,11 @@
 <?php
 
+
 /**
  * @file
  * Unformatted PDF style
  */
+
 
 /**
  * This class holds all the funtionality used for the unformatted style plugin.
@@ -27,7 +29,7 @@ class views_pdf_plugin_style_unformatted extends views_plugin_style {
 
     return $output;
   }
-
+  
   /**
    * Attach this view to another display as a feed.
    *

@@ -2,9 +2,10 @@
 
 /**
  * @file
- * PDF Views allows the creation of PDF's directly from a view. Without the
+ * PDF Views allows the creation of PDF's directly from a view. Without the 
  * creation of HTML first.
  */
+
 
 /**
  * Implementation of hook_views_api().
@@ -46,22 +47,23 @@ function theme_views_pdf_icon($url, $title) {
   $path = drupal_get_path('module', 'views_pdf') . '/images/pdf.png';
   if ($image = theme('image', $path, t('PDF content'), $title)) {
     return '<a href="'. check_url($url) .'" class="pdf-icon">'. $image .'</a>';
-  }
+  }  
 }
 
 /**
- * This method can be used to get all available fonts.
+ * This method can be used to get all available fonts. 
  */
 function views_pdf_get_font_list() {
   _views_pdf_include_pdf_lib();
   return PdfTemplate::getAvailableFontsCleanList();
 }
 
+
 /**
  * This function returns the path to a given library.
- *
+ * 
  * @param $name Name of the Library
- *
+ * 
  */
 function views_pdf_get_library($name) {
     if (function_exists('libraries_get_path')) {
@@ -72,17 +74,19 @@ function views_pdf_get_library($name) {
     }
 }
 
+
+
 /**
  * This method can be used to get all available templates.
  */
 function views_pdf_get_pdf_templates() {
   _views_pdf_include_pdf_lib();
-  return PdfTemplate::getAvailableTemplates();
+  return PdfTemplate::getAvailableTemplates();  
 }
 
 /**
  * This method returns all available hyphenation
- * patterns (paths to files).
+ * patterns (paths to files). 
  */
 function views_pdf_get_hyphenations() {
   _views_pdf_include_pdf_lib();
@@ -146,6 +150,7 @@ function views_pdf_get_page_formats() {
   return $format;
 }
 
+
 /**
  * Get the PDF class.
  */
@@ -154,10 +159,12 @@ function _views_pdf_include_pdf_lib() {
   require_once $path . '/views_pdf_template.php';
 }
 
+
+
 /**
- * For backward compatibilty (< 5.3) we implemented
- * this function by our self. If we are in a newer
- * environment, then this is obsolete.
+ * For backward compatibilty (< 5.3) we implemented 
+ * this function by our self. If we are in a newer 
+ * environment, then this is obsolete. 
  *
  */
 if (!function_exists('array_replace_recursive')) {
@@ -169,7 +176,7 @@ if (!function_exists('array_replace_recursive')) {
           if (!isset($array[$key]) || (isset($array[$key]) && !is_array($array[$key]))) {
             $array[$key] = array();
           }
-
+   
           // overwrite the value in the base array
           if (is_array($value)) {
             $value = recurse($array[$key], $value);
@@ -178,7 +185,7 @@ if (!function_exists('array_replace_recursive')) {
         }
         return $array;
       }
-
+   
       // handle the arguments, merge one by one
       $args = func_get_args();
       $array = $args[0];
@@ -194,3 +201,8 @@ if (!function_exists('array_replace_recursive')) {
     }
   }
 }
+
+
+
+
+

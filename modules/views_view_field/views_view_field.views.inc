@@ -10,6 +10,7 @@
  */
 function views_view_field_views_data() {
 
+
   $data['view']['table']['group'] = t('View');
   $data['view']['table']['join'] = array(
     '#global' => array(),
@@ -23,6 +24,9 @@ function views_view_field_views_data() {
       'click sortable' => FALSE,
       'notafield' => TRUE,
     ),
-  );
+  ); 
   return $data;
 }
+
+
+
